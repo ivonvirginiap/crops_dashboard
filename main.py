@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
+# from streamlit_option_menu import option_menu
 from streamlit_folium import st_folium
 import pandas as pd
 import folium
