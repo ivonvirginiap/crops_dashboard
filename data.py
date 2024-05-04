@@ -14,7 +14,7 @@ table_names = ['jagung', 'padi', 'kedelai', 'kacang_tanah', 'kacang_hijau', 'ubi
 username = "root"
 password = "ivonvp464394"
 database = "crops"
-host = "localhost"
+host = "127.0.0.1"
 engine = create_engine("mysql+pymysql://" + username + ":" + password + "@" + host + "/" + database)
 
 # Loop melalui setiap file CSV dan tabel MySQL yang sesuai
@@ -28,7 +28,7 @@ for file_name, table_name in zip(file_names, table_names):
 
     # Koneksi ke database MySQL
     conn = mc.connect(
-        host="localhost",
+        host="127.0.0.1",
         user="root",
         password="ivonvp464394",
         database="crops",
@@ -82,7 +82,7 @@ table_name = 'tanaman_pangan'
 username = "root"
 password = "ivonvp464394"
 database = "crops"
-host = "localhost"
+host = "127.0.0.1"
 auth_plugin="mysql_native_password"
 engine = create_engine("mysql+pymysql://" + username + ":" + password + "@" + host + "/" + database)
 
@@ -95,7 +95,7 @@ print(f'Data imported successfully into {table_name}')
 
 # Koneksi ke database MySQL
 conn = mc.connect(
-    host="localhost",
+    host="127.0.0.1",
     user="root",
     password="ivonvp464394",
     database="crops",
@@ -136,7 +136,7 @@ conn.close()
 
 def fetch_data(query):
     connection = pymysql.connect(
-        host="localhost",
+        host="127.0.0.1",
         port=3306,
         user="root",
         password="ivonvp464394",
@@ -153,7 +153,7 @@ def fetch_data(query):
 
 # Koneksi ke database MySQL untuk membuat tabel 'user'
 conn = mc.connect(
-    host="localhost",
+    host="127.0.0.1",
     user="root",
     password="ivonvp464394",
     database="crops",
@@ -187,7 +187,7 @@ def hash_password(password):
 def add_users(names, usernames, passwords):
     try:
         conn = mc.connect(
-            host="localhost",
+            host="127.0.0.1",
             user="root",
             password="ivonvp464394",
             database="crops",
