@@ -394,26 +394,18 @@ def selection_menu():
         if st.button('Log Out'):
             logout()
 
-        selected = option_menu(
-            menu_title= None, #required
-            options= ["Dashboard", "Analisis Data", "Prediksi Produksi", "Histori Produksi", "Model Visualisasi"], #required
-            icons = ["house", "house", "house", "house", "house"],
-            menu_icon = "cast",
-            default_index=0, #optional 
-            # orientation= "horizontal"
-        )
+        selected_option = st.radio("", ["Dashboard", "Analisis Data", "Prediksi Produksi", "Histori Produksi", "Model Visualisasi"])
 
-    if selected == "Dashboard":
+    if selected_option == "Dashboard":
         dashboard_page()
-    if selected == "Analisis Data":
+    elif selected_option == "Analisis Data":
         eda_page()
-    if selected == "Prediksi Produksi":
+    elif selected_option == "Prediksi Produksi":
         calculator_page()
-    if selected == "Histori Produksi":
+    elif selected_option == "Histori Produksi":
         chart_page()
-    if selected == "Model Visualisasi":
+    elif selected_option == "Model Visualisasi":
         plot_page()
-
 
 # Status awal login
 is_authenticated = False
