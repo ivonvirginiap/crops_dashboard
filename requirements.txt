@@ -1,0 +1,15 @@
+mysql-connector-python
+hashlib
+pandas
+SQLAlchemy
+pymysql
+streamlit
+streamlit-option-menu
+streamlit-folium
+folium
+seaborn
+matplotlib
+plotly-express
+scikit-learn
+kneed
+altair
