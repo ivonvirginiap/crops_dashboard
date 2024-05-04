@@ -1,5 +1,5 @@
 import streamlit as st
-# from streamlit_option_menu import option_menu
+from streamlit_option_menu import option_menu
 from streamlit_folium import st_folium
 import pandas as pd
 import folium
@@ -394,17 +394,24 @@ def selection_menu():
         if st.button('Log Out'):
             logout()
 
-        selected_option = st.radio("", ["Dashboard", "Analisis Data", "Prediksi Produksi", "Histori Produksi", "Model Visualisasi"])
+        selected = option_menu(
+            menu_title= None, #required
+            options= ["Dashboard", "Analisis Data", "Prediksi Produksi", "Histori Produksi", "Model Visualisasi"], #required
+            icons = ["house", "house", "house", "house", "house"],
+            menu_icon = "cast",
+            default_index=0, #optional 
+            # orientation= "horizontal"
+        )
 
-    if selected_option == "Dashboard":
+    if selected == "Dashboard":
         dashboard_page()
-    elif selected_option == "Analisis Data":
+    if selected == "Analisis Data":
         eda_page()
-    elif selected_option == "Prediksi Produksi":
+    if selected == "Prediksi Produksi":
         calculator_page()
-    elif selected_option == "Histori Produksi":
+    if selected == "Histori Produksi":
         chart_page()
-    elif selected_option == "Model Visualisasi":
+    if selected == "Model Visualisasi":
         plot_page()
 
 # Status awal login
