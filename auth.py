@@ -11,7 +11,7 @@ def hash_password(password):
 def verify_user_login(username, password):
     try:
         conn = mc.connect(
-            host="localhost",
+            host="127.0.0.1",
             user="root",
             password="ivonvp464394",
             database="crops",
