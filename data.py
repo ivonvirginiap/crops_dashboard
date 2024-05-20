@@ -17,7 +17,7 @@ df.to_sql(name='crop', con=conn)
 
 query = pd.read_sql('select * from crop limit 5', conn)
 
-raise Exception(str(query))
+raise Exception(str(query)) 
 
 
 
