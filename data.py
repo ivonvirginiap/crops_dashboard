@@ -5,7 +5,21 @@ import pymysql
 import os
 import hashlib
 import sqlite3
+
+import pandas as pd
 print(dir(sqlite3))
+
+conn = sqlite3.connect('crops.sql3')
+crops = 'jagung.csv'
+df = pd.read_csv('data/' + crops, encoding='unicode_escape', sep=';')
+
+df.to_sql(name='crop', con=conn)
+
+query = pd.read_sql('select * from crop limit 5', conn)
+
+raise Exception(str(query))
+
+
 
 #------------------------IMPORT DATA PER KOMODITAS---------------------------------------
 # List nama file CSV dan nama tabel MySQL yang sesuai
@@ -13,19 +27,21 @@ file_names = ['jagung.csv', 'padi.csv', 'kedelai.csv', 'kacang_tanah.csv', 'kaca
 table_names = ['jagung', 'padi', 'kedelai', 'kacang_tanah', 'kacang_hijau', 'ubi_kayu', 'ubi_jalar']
 
 # Koneksi ke database MySQL
-username = "root"
-password = "ivonvp464394"
-database = "crops"
-host = "localhost"
-engine = create_engine("mysql+pymysql://" + username + ":" + password + "@" + host + "/" + database)
+# username = "root"
+# password = "ivonvp464394"
+# database = "crops"
+# host = "localhost"
+# engine = create_engine("mysql+pymysql://" + username + ":" + password + "@" + host + "/" + database)
 
+conn = sqlite3.connect('crops.sql3:')
 # Loop melalui setiap file CSV dan tabel MySQL yang sesuai
 for file_name, table_name in zip(file_names, table_names):
     # Baca file CSV
     df = pd.read_csv('data/' + file_name, encoding='unicode_escape', sep=';')
 
     # Simpan dataframe ke dalam tabel MySQL
-    df.to_sql(table_name, engine, if_exists='replace')
+    # df.to_sql(table_name, engine, if_exists='replace')
+    df.to_sql(table_name, if_exists='replace')
     print(f'Data imported successfully into {table_name}')
 
     # Koneksi ke database MySQL
