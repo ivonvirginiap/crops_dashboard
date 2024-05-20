@@ -66,5 +66,3 @@ def verify_user_login(username, password):
     except Exception as e:
         print("An error occurred during login:", e)
         return False
-
-
