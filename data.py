@@ -13,9 +13,9 @@ conn = sqlite3.connect('crops.sql3')
 crops = 'jagung.csv'
 df = pd.read_csv('data/' + crops, encoding='unicode_escape', sep=';')
 
-df.to_sql(name='crop', con=conn)
+df.to_sql(name='tanaman', con=conn)
 
-query = pd.read_sql('select * from crop limit 5', conn)
+query = pd.read_sql('select * from tanaman limit 5', conn)
 
 raise Exception(str(query)) 
 
