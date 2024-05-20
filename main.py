@@ -182,7 +182,7 @@ def calculator_page():
     # Query untuk mengambil data dari tabel terpilih
     query = f"SELECT * FROM {selected_table}"
     data = fetch_data(query)
-    df = pd.DataFrame(data, columns=["Provinsi", "Komoditas", "Tahun", "Luas Panen", "Produksi", "KMeans", "KMeans Label", "Prediksi Luas Panen", "Prediksi Produksi"])
+    df = pd.DataFrame(data, columns=["Provinsi", "Komoditas", "Tahun", "Luas Panen", "Produksi", "KMeans", "KMeans Label", "Prediksi Produksi"])
 
     # Menentukan fitur yang akan digunakan untuk regresi
     X_feature = "Luas Panen"
