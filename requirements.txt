@@ -12,3 +12,4 @@ plotly-express
 scikit-learn
 kneed
 altair
+db-sqlite3
