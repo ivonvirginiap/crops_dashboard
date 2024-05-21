@@ -67,7 +67,7 @@ def dashboard_page():
     # Query untuk mengambil data dari tabel terpilih
     query = f"SELECT * FROM {selected_table}"
     data = fetch_data(query)
-    df = pd.DataFrame(data, columns=["Provinsi", "Komoditas", "Tahun", "Luas Panen", "Produksi", "KMeans", "KMeans Label"])
+    df = pd.DataFrame(data, columns=["Provinsi", "Komoditas", "Tahun", "Luas Panen", "Produksi", "KMeans", "KMeans Label", "Prediksi Produksi"])
 
     # Filter komoditas berdasarkan tabel yang dipilih
     filtered_df = df.loc[df['Komoditas'].isin(df.loc[df['Komoditas'].notnull(), 'Komoditas'].unique())]
@@ -174,7 +174,7 @@ def calculator_page():
     st.title('Kalkulator Prediksi Produksi')
 
     # Daftar nama tabel yang ingin ditampilkan
-    table_names = ["kacang_tanah", "kacang_hijau", "ubi_jalar", "ubi_kayu", "padi", "kedelai", "jagung", "merged_all_data"]
+    table_names = ["kacang_tanah", "kacang_hijau", "ubi_jalar", "ubi_kayu", "padi", "kedelai", "jagung"]
 
     # Tampilkan pilihan tabel pada sidebar
     selected_table = st.selectbox("Pilih Komoditas", table_names)
@@ -313,7 +313,7 @@ def plot_page():
     # Query untuk mengambil data dari tabel terpilih
     query = f"SELECT * FROM {selected_table}"
     data = fetch_data(query)
-    df = pd.DataFrame(data, columns=["Provinsi", "Komoditas", "Tahun", "Luas Panen", "Produksi", "KMeans", "KMeans Label", "Prediksi Luas Panen", "Prediksi Produksi"])
+    df = pd.DataFrame(data, columns=["Provinsi", "Komoditas", "Tahun", "Luas Panen", "Produksi", "KMeans", "KMeans Label", "Prediksi Produksi"])
 
     # Menentukan fitur yang akan digunakan untuk clustering
     features = ["Luas Panen", "Produksi"]

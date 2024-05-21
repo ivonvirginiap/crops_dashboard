@@ -257,14 +257,37 @@ for file_name, table_name in zip(file_names, table_names):
     SET 
     `Luas Panen` = REPLACE(`Luas Panen`, ',', '.'),
     `Produksi` = REPLACE(`Produksi`, ',', '.'),
-    `Prediksi Luas Panen` = REPLACE(`Prediksi Luas Panen`, ',', '.'),
     `Prediksi Produksi` = REPLACE(`Prediksi Produksi`, ',', '.')
     """
 
     # Eksekusi query update
+    cursor = conn.cursor()
     cursor.execute(update_query)
     conn.commit()
     print(f'Data in {table_name} updated successfully')
+
+    # Query untuk mengubah tipe data kolom
+    # SQLite tidak mendukung MODIFY jadi kita harus melakukan CREATE TABLE baru dan INSERT
+    alter_query = f"""
+    CREATE TABLE IF NOT EXISTS {table_name}_new AS
+    SELECT
+        CAST(`Provinsi` AS VARCHAR) AS `Provinsi`,
+        CAST(`Komoditas` AS VARCHAR) AS `Komoditas`,
+        CAST(`Tahun` AS INT) AS `Tahun`,
+        CAST(`Luas Panen` AS FLOAT) AS `Luas Panen`,
+        CAST(`Produksi` AS FLOAT) AS `Produksi`,
+        CAST(`KMeans` AS INT) AS `KMeans`,
+        CAST(`KMeans Label` AS VARCHAR) AS `KMeans Label`,
+        CAST(`Prediksi Produksi` AS FLOAT) AS `Prediksi Produksi`
+    FROM {table_name}
+    """
+    
+    # Eksekusi query alter
+    cursor.execute(alter_query)
+    cursor.execute(f"DROP TABLE {table_name}")
+    cursor.execute(f"ALTER TABLE {table_name}_new RENAME TO {table_name}")
+    conn.commit()
+    print(f'Data columns in {table_name} updated successfully')
 
 #-------------------------IMPORT DATA GABUNGAN TANAMAN PANGAN--------------------------------
 
@@ -288,9 +311,30 @@ SET
 """
 
 # Eksekusi query update
+cursor = conn.cursor()
 cursor.execute(update_query)
 conn.commit()
 print(f'Data in {table_name} updated successfully')
+
+# Query untuk mengubah tipe data kolom
+# SQLite tidak mendukung MODIFY jadi kita harus melakukan CREATE TABLE baru dan INSERT
+alter_query = f"""
+CREATE TABLE IF NOT EXISTS {table_name}_new AS
+SELECT
+    CAST(`Provinsi` AS VARCHAR) AS `Provinsi`,
+    CAST(`Komoditas` AS VARCHAR) AS `Komoditas`,
+    CAST(`Tahun` AS INT) AS `Tahun`,
+    CAST(`Luas Panen` AS FLOAT) AS `Luas Panen`,
+    CAST(`Produksi` AS FLOAT) AS `Produksi`
+FROM {table_name}
+"""
+
+# Eksekusi query alter
+cursor.execute(alter_query)
+cursor.execute(f"DROP TABLE {table_name}")
+cursor.execute(f"ALTER TABLE {table_name}_new RENAME TO {table_name}")
+conn.commit()
+print(f'Data columns in {table_name} updated successfully')
 
 #-------------------------FUNGSI UNTUK MENGAMBIL DATA--------------------------------
 
